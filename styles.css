@@ -1,0 +1,86 @@
+/* Shared reset + font loading for all three variations */
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;600;700;900&family=Noto+Sans+TC:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Manrope:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; }
+
+.variant-root {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  color: var(--ink, #1a1a1a);
+  background: var(--paper, #fafaf7);
+  font-family: 'Manrope', 'Noto Sans TC', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.variant-root img { display: block; max-width: 100%; }
+.variant-root h1, .variant-root h2, .variant-root h3, .variant-root h4, .variant-root p, .variant-root ul, .variant-root ol {
+  margin: 0; padding: 0; font-weight: inherit;
+}
+.variant-root button { font: inherit; cursor: pointer; }
+.variant-root a { color: inherit; text-decoration: none; }
+
+/* Subtle paper grain — used by v2 + v3 */
+.paper-grain {
+  position: absolute; inset: 0; pointer-events: none; opacity: .35; mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.2  0 0 0 0 0.16  0 0 0 0 0.12  0 0 0 0.06 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+
+/* Generic placeholder image — striped */
+.ph {
+  position: relative;
+  background:
+    repeating-linear-gradient(135deg, rgba(0,0,0,0.04) 0 1px, transparent 1px 12px),
+    var(--ph-bg, #e8e3d8);
+  color: var(--ph-fg, #6b6258);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  display: flex; align-items: center; justify-content: center;
+  text-align: center; padding: 16px;
+  overflow: hidden;
+}
+.ph::after {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(135deg, transparent 49%, rgba(0,0,0,0.06) 49% 51%, transparent 51%),
+    linear-gradient(45deg,  transparent 49%, rgba(0,0,0,0.06) 49% 51%, transparent 51%);
+  background-size: 100% 100%;
+  pointer-events: none;
+  opacity: .25;
+}
+.ph > span { position: relative; z-index: 1; }
+
+/* Common stamp / seal accent (Chinese seal style) for v2/v3 */
+.seal {
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--seal-bg, #b13b2e);
+  color: #f9f0e0;
+  font-family: 'Noto Serif TC', serif;
+  font-weight: 700;
+  border-radius: 4px;
+  padding: 6px 9px;
+  letter-spacing: 0.18em;
+  box-shadow: inset 0 0 0 2px rgba(255,255,255,0.18), 0 1px 0 rgba(0,0,0,0.1);
+}
+
+/* Reusable nav bar styling base */
+.nav-row { display: flex; align-items: center; gap: 36px; }
+
+/* Reveal-on-scroll-ish fade (used inside artboards as decoration only) */
+.fade-in { opacity: 1; transform: translateY(0); transition: opacity .8s ease, transform .8s ease; }
+
+/* Buttons */
+.btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 14px 24px;
+  border: none; border-radius: 999px;
+  font-weight: 500; font-size: 14px; letter-spacing: 0.02em;
+  transition: transform .2s ease, background .2s ease, color .2s ease;
+}
+.btn:hover { transform: translateY(-1px); }
+.btn-arrow { display: inline-block; transition: transform .25s ease; }
+.btn:hover .btn-arrow { transform: translateX(4px); }
