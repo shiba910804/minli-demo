@@ -73,6 +73,36 @@
 /* Reveal-on-scroll-ish fade (used inside artboards as decoration only) */
 .fade-in { opacity: 1; transform: translateY(0); transition: opacity .8s ease, transform .8s ease; }
 
+/* Marquee announcement bar */
+@keyframes marquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.marquee-track {
+  animation: marquee 28s linear infinite;
+  display: flex;
+  white-space: nowrap;
+}
+.marquee-track:hover { animation-play-state: paused; }
+
+/* Hero gradient animation */
+@keyframes heroGradient {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.hero-animated-bg {
+  background: linear-gradient(135deg, #f6faf6, #e6f0e6, #fdf0ee, #f0f4fa, #f6faf6);
+  background-size: 400% 400%;
+  animation: heroGradient 18s ease infinite;
+}
+
+/* Hero carousel progress bar */
+@keyframes carouselBar {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
 /* Buttons */
 .btn {
   display: inline-flex; align-items: center; gap: 10px;
@@ -84,3 +114,55 @@
 .btn:hover { transform: translateY(-1px); }
 .btn-arrow { display: inline-block; transition: transform .25s ease; }
 .btn:hover .btn-arrow { transform: translateX(4px); }
+
+/* Product image clickable link with hover overlay */
+.product-img-link {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.product-img-link .ph {
+  transition: transform 0.42s ease;
+  display: block;
+  width: 100%;
+}
+.product-img-link:hover .ph {
+  transform: scale(1.05);
+}
+.product-img-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(20, 16, 12, 0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s ease;
+  pointer-events: none;
+  z-index: 2;
+}
+.product-img-link:hover .product-img-overlay {
+  background: rgba(20, 16, 12, 0.44);
+}
+.product-img-overlay-badge {
+  color: #fff;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  padding: 9px 20px;
+  border: 1.5px solid rgba(255, 255, 255, 0.88);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(6px);
+  opacity: 0;
+  transform: translateY(10px) scale(0.94);
+  transition: opacity 0.28s ease 0.06s, transform 0.28s ease 0.06s;
+  white-space: nowrap;
+  pointer-events: none;
+}
+.product-img-link:hover .product-img-overlay-badge {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}

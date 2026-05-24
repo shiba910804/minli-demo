@@ -125,7 +125,7 @@ const Site = () => {
       if (el.tagName === 'BUTTON' && el.closest('[data-no-route], select')) return;
 
       const key = normalize(el.textContent);
-      const target = TEXT_TO_ROUTE[key];
+      const target = el.dataset.route || TEXT_TO_ROUTE[key];
       if (!target) return;
 
       // Capture product id from data-product-id attribute when navigating to a product page
